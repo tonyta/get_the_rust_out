@@ -17,6 +17,3 @@
 
 # Ignores system files
 .DS_Store
-
-# Ignore secrets... shhh...
-/config/secrets.yml
