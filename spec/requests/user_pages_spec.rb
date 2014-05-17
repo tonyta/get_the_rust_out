@@ -30,7 +30,7 @@ describe "User pages" do
         before { click_button submit }
 
         it { should have_title('Sign up') }
-        it { should have_selector("div.alert.alert-error", text: 'error') }
+        it { should have_error_message('error') }
       end
 
       it "should not create user" do
@@ -52,15 +52,16 @@ describe "User pages" do
         fill_in "Confirmation", with: user.password
       end
 
-      describe "after submission" do
-        before { click_button submit }
-
-        it { should have_title(user.name) }
-        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
-      end
-
       it "should create a user" do
         expect { click_button submit }.to change(User, :count).by(1)
+      end
+
+      describe "after saving the user" do
+        before { click_button submit }
+
+        it { should have_link('Sign out') }
+        it { should have_title(user.name) }
+        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
       end
     end
   end
