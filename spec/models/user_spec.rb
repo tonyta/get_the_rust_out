@@ -7,6 +7,10 @@ describe User do
                      password: 'foobar', password_confirmation: 'foobar')
   end
 
+  it "should pageinate 10 user per page" do
+    expect(User.per_page).to eq 10
+  end
+
   subject { @user }
 
   it { should respond_to(:name) }
@@ -16,8 +20,20 @@ describe User do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:admin) }
 
   it { should be_valid }
+  it { should_not be_admin }
+
+  describe "with admin attribute set to 'true'" do
+    before do
+      @user.save!
+      @user.toggle!(:admin)
+    end
+
+    it { should be_admin }
+  end
+
 
   describe "email address with mixed case" do
     let(:mixed_case_email) { "Foo@ExAMPle.CoM" }

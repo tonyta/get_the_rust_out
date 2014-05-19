@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 6 }
 
+  self.per_page = 10
+
   def self.new_remember_token
     SecureRandom.urlsafe_base64
   end
