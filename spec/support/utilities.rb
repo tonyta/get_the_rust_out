@@ -14,6 +14,21 @@ def sign_in(user, options = {})
   end
 end
 
+def sign_out(options = {})
+  click_link 'Sign out'
+end
+
+def user_params
+  { user: { name: "Example user",
+            email: "user@example.com",
+            password: "password",
+            password_confirmation: "password" } }
+end
+
+def signin_params
+  { email: "user@example.com", password: "password" }
+end
+
 RSpec::Matchers.define :have_error_message do |message|
   match do |page|
     expect(page).to have_selector('div.alert.alert-error', text: message)

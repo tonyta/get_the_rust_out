@@ -9,5 +9,4 @@ FactoryGirl.define do
       admin true
     end
   end
-
 end

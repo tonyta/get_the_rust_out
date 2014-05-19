@@ -36,9 +36,23 @@ describe "Authentication" do
       it { should have_link('Sign out',    href: signout_path) }
       it { should_not have_link('Sign in', href: signin_path) }
 
+      describe "when trying to sign in again" do
+        before { visit signin_path }
+        specify { expect(current_url).to eq root_url }
+      end
+
+      describe "when signing up again" do
+        before { visit signup_path }
+        specify { expect(current_url).to eq root_url }
+      end
+
       describe "followed by signout" do
         before { click_link "Sign out" }
-        it { should have_link('Sign in')}
+
+        it { should_not have_link('Users',    href: users_path) }
+        it { should_not have_link('Profile',  href: user_path(user)) }
+        it { should_not have_link('Settings', href: edit_user_path(user)) }
+        it { should have_link('Sign in') }
       end
     end
   end
@@ -60,6 +74,15 @@ describe "Authentication" do
 
           it "should render the desired protected page" do
             expect(page).to have_title('Edit user')
+          end
+
+          describe "when signing out and back in again" do
+            before do
+              sign_out
+              sign_in(user)
+            end
+            specify { expect(page).not_to have_title('Edit user') }
+            specify { expect(page).to have_title(user.name) }
           end
         end
       end

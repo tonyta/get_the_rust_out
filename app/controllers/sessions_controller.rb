@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :already_signed_in, only: [:new, :create]
+
   def new
   end
 
@@ -18,4 +20,10 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_url
   end
+
+  private
+
+    def already_signed_in
+      redirect_to(root_url) unless current_user.nil?
+    end
 end
