@@ -10,8 +10,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    # @microposts = @user.microposts
+    @micropost = @user.microposts.build
     @microposts = @user.microposts.paginate(page: params[:page])
+    store_location
   end
 
   def new

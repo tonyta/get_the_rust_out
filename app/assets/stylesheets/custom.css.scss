@@ -220,6 +220,28 @@ input {
 aside {
   textarea {
     height: 100px;
+    width: 260px;
     margin-bottom: 5px;
   }
+}
+
+
+/* character count */
+
+#character_count {
+  margin-bottom: 10px;
+}
+
+#count {
+  display: inline;
+  padding-bottom: 20px;
+}
+
+.count_warning {
+  color: #b94a48;
+  font-weight: bold;
+}
+
+.count_over {
+  background-color: #f2dede;
 }

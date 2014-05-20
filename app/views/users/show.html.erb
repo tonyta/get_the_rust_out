@@ -9,6 +9,11 @@
         <%= @user.name %>
       </h1>
     </section>
+    <% if signed_in? && current_user?(@user) %>
+    <section>
+      <%= render 'shared/micropost_form' %>
+    </section>
+    <% end %>
   </aside>
 
   <div class='span8'>

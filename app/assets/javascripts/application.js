@@ -15,3 +15,35 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+$(function(){
+
+  var charMax = 140,
+      charCount, charRemain;
+
+  var countDisplay = document.getElementById('count');
+  var textArea = document.getElementById('micropost_content');
+  var count = document.getElementById('count');
+
+  $(textArea).on('keyup', function(event){
+
+    charCount = this.value.length;
+    charRemain = charMax - charCount;
+
+    countDisplay.innerText = charRemain;
+
+    if (charRemain < 10) {
+      count.className = 'count_warning';
+    } else {
+      count.className = '';
+    }
+
+    if (charRemain < 0) {
+      textArea.className = 'count_over';
+    } else {
+      textArea.className = '';
+    }
+
+  });
+
+});
